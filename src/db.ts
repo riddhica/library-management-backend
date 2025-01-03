@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { ConnectOptions } from "mongoose";
+//import { ConnectOptions } from "mongoose";
 import dotenv from 'dotenv';
 
 // Load env variables
@@ -12,10 +12,7 @@ const connectDB = async (): Promise<void> => {
       throw new Error('MongoDB URI is not defined in environment variables');
     }
 
-    await mongoose.connect(dbURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    } as ConnectOptions);
+    await mongoose.connect(dbURI);
 
     console.log('MongoDB connected');
   } catch (err) {
