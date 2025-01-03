@@ -1,22 +1,16 @@
 import express, { Request, Response } from 'express';
-import mongoose from 'mongoose';
-import { ConnectOptions } from "mongoose"
 import cors from 'cors';
-import bodyParser from 'body-parser';
 import bookRoutes from './routes/bookRoutes';
 
+import connectDB from './db';
 const app = express();
+
+// Connect to MongoDB
+connectDB();
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
-
-// Database connection
-mongoose.connect('mongodb://localhost:27017/library', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-} as ConnectOptions ).then(() => console.log('MongoDB connected'))
-  .catch(err => console.log('MongoDB connection error: ', err));
+app.use(express.json());
 
 // Routes
 app.use('/books', bookRoutes);
